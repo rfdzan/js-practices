@@ -98,5 +98,30 @@ function maxSequence(arr) {
   return maxNum;
 
 }
-console.log(maxSequence([35, -26, 7])
-);
+/** @param {number} x */
+function zeroPad(x) {
+  if (x === 0) {
+    return '00'
+  }
+  if (x.toString().length < 2) {
+    return `0${x}`
+  }
+  return x
+}
+/** @param {number} seconds */
+function humanReadable(seconds) {
+  let hours = seconds / 3600;
+  let flooredHours = Math.floor(hours);
+  let leftOverHours = (hours - Math.floor(hours)) * 60;
+  let flooredMinutes = Math.floor(leftOverHours);
+  let leftOverMinutes = leftOverHours - flooredMinutes;
+  let rawSeconds = leftOverMinutes * 60;
+  let flooredSeconds = rawSeconds - Math.floor(rawSeconds) >= 0.5 ? Math.ceil(rawSeconds) : Math.floor(rawSeconds);
+  flooredSeconds = flooredSeconds == 60 ? flooredSeconds - 1 : flooredSeconds;
+  console.log(rawSeconds);
+  return `${zeroPad(flooredHours)}:${zeroPad(flooredMinutes)}:${zeroPad(flooredSeconds)}`;
+}
+let time = 45296;
+console.log(humanReadable(time));
+
+
